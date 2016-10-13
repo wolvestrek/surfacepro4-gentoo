@@ -117,7 +117,7 @@ compiling and installing
 
 In the first step install just some basic packages
 
-    emerge -a efibootmgr networkmanager terminus-font
+    emerge -a efibootmgr linux-firmware networkmanager terminus-font
     
 Adjust /etc/fstab, /etc/conf.d/keymaps, /etc/conf.d/hostname and /etc/conf.d/consolefont and make sure that the appropriate services will be started next reboot
     
