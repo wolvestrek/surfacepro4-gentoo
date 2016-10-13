@@ -18,13 +18,13 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # Preparing your NVMe disk
 
-To use the whole disk, like I do, replace everything on the disk with random bytes.
+To use the whole disk, like I do, replace everything on the disk with random bytes
 
-**Warning: This command will remove all your data from your HDD including your Windows recovery. If you do not want this I recommend you to [shrink your Windows partition](https://github.com/jimdigriz/debian-mssp4#shrinking-the-windows-partition).**
+**Warning: This command will remove all your data from your HDD including your Windows recovery. If you do not want this I recommend you to [shrink your Windows partition](https://github.com/jimdigriz/debian-mssp4#shrinking-the-windows-partition)**
 
     shred -n 1 -v /dev/nvme0n1
 
-Now create a new parition scheme.
+Now create a new parition scheme
 
 Partition | Filesystem | Size
 --- | --- | ---
