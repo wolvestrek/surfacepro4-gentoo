@@ -109,7 +109,7 @@ For now only add some required modules
         
 compiling and installing
 
-    make -j4
+    make -j5
     make install
     make modules_install
     
