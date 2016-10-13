@@ -102,8 +102,8 @@ For now only add some required modules
       [*] Network device support --->
         [*] Wireless LAN --->
           [*] Marvell devices
-            [*] Marvell WiFi-Ex Driver
-              [*] Marvell WiFi-Ex Driver for PCIE 8766/8897/8997
+            [M] Marvell WiFi-Ex Driver
+              [M] Marvell WiFi-Ex Driver for PCIE 8766/8897/8997
       [*] USB support --->
         <*> xHCI HCD (USB 3.0) support
         
