@@ -10,7 +10,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
  * Boot a [SystemRescueCd](http://www.system-rescue-cd.org/SystemRescueCd_Homepage)
  * [Preparing your NVMe disk](#preparing-your-nvme-disk)
  * [Downloading the latest stage3](#downloading-the-latest-stage3)
- * [Entering your new system](entering-your-new-system)
+ * [Entering your new system](#entering-your-new-system)
  * [Configuring the kernel](#configuring-the-kernel)
  * [Installing the base system](#installing-the-base-system)
  * [Setup the bootloader](#setup-the-bootloader)
