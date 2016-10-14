@@ -131,7 +131,11 @@ Adjust /etc/fstab, /etc/conf.d/keymaps, /etc/conf.d/hostname and /etc/conf.d/con
 You have to exit the chroot envirmonment first because efibootmgr fails to determine the right disk UUID
 
     efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4 -L "Gentoo Linux" -u "root=/dev/nvme0n1p3"
-    
+
+I recommend to create a boot entry for *old* kernel also
+
+    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4.old -L "Gentoo Linux (old)" -u "root=/dev/nvme0n1p3"
+
 # Finalizing the base installation
 
     exit
