@@ -18,6 +18,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # Optimizations
 
+ * [Re-compiling the system with custom CFLAGS](re-compiling-the-system-with-custom-cflags)
  * [Systemd](#systemd)
 
 # Preparing your NVMe disk
@@ -149,6 +150,30 @@ I recommend to create a boot entry for *old* kernel also
     reboot
     
 **If everything goes right you now should have a working base systen**
+
+# Re-compiling the system with custom CFLAGS
+
+Edit your */etc/portage/make.conf*
+
+    CFLAGS="-march=native -O2 -pipe"
+    CXXFLAGS="${CFLAGS}"
+
+after that update GCC to version 5.4, maybe you have to unmask the *~amd64* flag
+
+    emerge -u gcc
+    
+To re-compile the system do
+
+    cd /usr/portage/scripts
+    ./bootstrap.sh
+    
+run it twice to ensure that everything in the toolchain have been rebuilt using the new compiler
+
+    ./bootstrap.sh
+    
+Now you can rebuild the system
+
+    emerge --emptytree --with-bdeps=y @world
 
 # Systemd
 
