@@ -18,7 +18,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # Optimizations
 
- * [Re-compiling the system with custom CFLAGS](re-compiling-the-system-with-custom-cflags)
+ * [Re-compiling the system with custom CFLAGS](#re-compiling-the-system-with-custom-cflags)
  * [Systemd](#systemd)
 
 # Preparing your NVMe disk
