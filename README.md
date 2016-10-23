@@ -19,6 +19,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 # Optimizations
 
  * [Re-compiling the system with custom CFLAGS](#re-compiling-the-system-with-custom-cflags)
+ * [Optimized CPU_FLAGS_X86](#optimized-cpu_flags_x86)
  * [Systemd](#systemd)
 
 # Preparing your NVMe disk
@@ -174,6 +175,16 @@ run it twice to ensure that everything in the toolchain have been rebuilt using 
 Now you can rebuild the system
 
     emerge --emptytree --with-bdeps=y @world
+
+# Optimized CPU_FLAGS_X86
+
+You can determine them by emerging *app-portage/cpuid2cpuflags* and add them to your */etc/portage/make.conf*
+
+    CPU_FLAGS_X86="aes avx avx2 fma3 mmx mmxext popcnt sse sse2 sse3 sse4_1 sse4_2 ssse3"
+
+after that recompile all affected packages
+
+    emerge -N @world
 
 # Systemd
 
