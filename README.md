@@ -184,7 +184,7 @@ You can determine them by emerging *app-portage/cpuid2cpuflags* and add them to 
 
 after that recompile all affected packages
 
-    emerge -N @world
+    emerge -DN @world
 
 # Systemd
 
