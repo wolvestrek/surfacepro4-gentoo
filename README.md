@@ -2,7 +2,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # What is working?
 
- * NVMe solid state drive including ext4 encryption
+ * NVMe solid state drive including Ext4 Encryption
 
 # Installation steps
 
@@ -21,6 +21,10 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
  * [Re-compiling the system with custom CFLAGS](#re-compiling-the-system-with-custom-cflags)
  * [Optimized CPU_FLAGS_X86](#optimized-cpu_flags_x86)
  * [Systemd](#systemd)
+
+# Security
+
+ * [Ext4 encrypted home directory](#ext4-encrypted-home-directory)
 
 # Preparing your NVMe disk
 
@@ -217,3 +221,20 @@ Now Gentoo should be restarted with the new Systemd init system so you can
 and reboot to double-check that everything is working fine with Systemd
 
     systemctl reboot
+
+# Ext4 encrypted home directory
+
+Enable Ext4 Encryption in the kernel
+
+    File Systems --->
+    <*> The Extended 4 (ext4) filesystem
+    <*>   Ext4 Encryption
+
+reboot the new kernel and make sure that you have at least version 1.43 of e2fsprogs installed, maybe you have to unmask *~amd64* for e2fsprogs
+
+    emerge -u e2fsprogs
+
+Now you can active Ext4 Encryption
+
+    tune2fs -O encrypt /dev/nvme0n1p3
+    
