@@ -64,8 +64,20 @@ and connect to the internet
 then download the archive
 
     cd /mnt/gentoo
-    wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-20161006.tar.bz2
-    tar xvjpf stage3-amd64-20161006.tar.bz2
+    wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-YYYYMMDD.tar.bz2
+    
+I recommend to check the integrity for the stage file
+
+    wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-YYYYMMDD.tar.bz2.CONTENTS
+    wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-YYYYMMDD.tar.bz2.DIGESTS.asc
+    
+    gpg --keyserver pool.sks-keyservers.net --recv-key 2D182910
+    gpg --verify stage3-amd64-*.tar.bz2.DIGESTS.asc
+    awk '/SHA512 HASH/{getline;print}' stage3-amd64-*.tar.bz2.DIGESTS.asc | sha512sum --check 
+    
+and extract the contents
+    
+    tar xvjpf stage3-amd64-*.tar.bz2
 
 # Entering your new system
 
