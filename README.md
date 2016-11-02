@@ -18,9 +18,9 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # Optimizations
 
+ * [Configuring Systemd](#configuring-systemd)
  * [Re-compiling the system with custom CFLAGS](#re-compiling-the-system-with-custom-cflags)
  * [Optimized CPU_FLAGS_X86](#optimized-cpu_flags_x86)
- * [Systemd](#systemd)
 
 # Preparing your NVMe disk
 
@@ -135,26 +135,29 @@ compiling and installing
 
 In the first step install just some basic packages
 
-    emerge -a efibootmgr linux-firmware networkmanager terminus-font
+    emerge -a linux-firmware networkmanager terminus-font
     
-Adjust /etc/fstab, /etc/conf.d/keymaps, /etc/conf.d/hostname and /etc/conf.d/consolefont and make sure that the appropriate services will be started next reboot
+Adjust your /etc/fstab.
+
+There's a very good documentation how to install [Systemd on Gentoo](https://wiki.gentoo.org/wiki/Systemd). In short you have to reconfigure your kernel, append *systemd* to the USE variable and update packages
+
+    emerge -uDN @world    
     
-    rc-update add consolefont boot
-    rc-update add NetworkManager default
-    
-    passwd
+you can use Systemd's own boot manager, recompile the systemd package with *gnuefi* USE flag.
     
 # Setup the bootloader
 
-You have to exit the chroot envirmonment first because efibootmgr fails to determine the right disk UUID
+[Configure the loader entries](https://wiki.archlinux.org/index.php/systemd-boot) in /boot/loader.
 
-    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4 -L "Gentoo Linux" -u "root=/dev/nvme0n1p3"
-
-I recommend to create a boot entry for *old* kernel also
-
-    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4.old -L "Gentoo Linux (recovery)" -u "root=/dev/nvme0n1p3"
+    bootctl install
 
 # Finalizing the base installation
+
+Set root password
+
+    passwd
+    
+and reboot into your new system
 
     exit
     cd ~
@@ -163,6 +166,23 @@ I recommend to create a boot entry for *old* kernel also
     reboot
     
 **If everything goes right you now should have a working base systen**
+
+# Configuring Systemd
+
+Now Gentoo should be restarted with the new Systemd init system so you can
+
+    systemd-machine-id-setup
+    hostnamectl set-hostname <HOSTNAME>
+    localectl set-keymap <KEYMAP>
+    timedatectl set-timezone <TIMEZONE>
+    echo "FONT=ter-132n" >> /etc/vconsole.conf
+
+    systemctl enable NetworkManager.service
+    systemctl start NetworkManager.service
+
+and reboot to double-check that everything is working fine with Systemd
+
+    systemctl reboot
 
 # Re-compiling the system with custom CFLAGS
 
@@ -197,35 +217,3 @@ You can determine them by emerging *app-portage/cpuid2cpuflags* and add them to 
 after that recompile all affected packages
 
     emerge -DN @world
-
-# Systemd
-
-There's a very good documentation how to install [Systemd on Gentoo](https://wiki.gentoo.org/wiki/Systemd). In short you have to reconfigure your kernel, append *systemd* to the USE variable and update packages
-
-    emerge -uDN @world
-    
-After that create new boot entries
-
-    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4 -L "Gentoo Linux (systemd)" -u "init=/usr/lib/systemd/systemd root=/dev/nvme0n1p3 quiet"
-    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4 -L "Gentoo Linux (systemd, debug)" -u "init=/usr/lib/systemd/systemd root=/dev/nvme0n1p3"
-    efibootmgr -c -d /dev/nvme0n1p1 -l /vmlinuz-4.5.0-pf4.old -L "Gentoo Linux (systemd, recovery)" -u "init=/usr/lib/systemd/systemd root=/dev/nvme0n1p3"
-
-alternative you can use Systemd's own boot manager, recompile the systemd package with *gnuefi* USE flag and [configure the loader entries](https://wiki.archlinux.org/index.php/systemd-boot) in /boot/loader, then
-
-    bootctl install
-    reboot
-
-Now Gentoo should be restarted with the new Systemd init system so you can
-
-    systemd-machine-id-setup
-    hostnamectl set-hostname <HOSTNAME>
-    localectl set-keymap <KEYMAP>
-    timedatectl set-timezone <TIMEZONE>
-    echo "FONT=ter-132n" >> /etc/vconsole.conf
-
-    systemctl enable NetworkManager.service
-    systemctl start NetworkManager.service
-
-and reboot to double-check that everything is working fine with Systemd
-
-    systemctl reboot
