@@ -200,10 +200,6 @@ To re-compile the system do
     cd /usr/portage/scripts
     ./bootstrap.sh
     
-run it twice to ensure that everything in the toolchain have been rebuilt using the new compiler
-
-    ./bootstrap.sh
-    
 Now you can rebuild the system
 
     emerge --emptytree --with-bdeps=y @world
