@@ -1,0 +1,11 @@
+#!/bin/bash
+
+post_pkg_preinst() {
+	elog "Running etckeeper pre-install..."
+	/usr/bin/etckeeper pre-install
+}
+
+post_pkg_postinst() {
+	elog "Running etckeeper post-install..."
+	/usr/bin/etckeeper post-install
+}
