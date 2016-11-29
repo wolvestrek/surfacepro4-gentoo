@@ -18,7 +18,7 @@ This How To is inspired by the well-done [Installing Debian on the Microsoft Sur
 
 # Optimizations
 
- * [Configuring Systemd](#configuring-systemd)
+ * [Configuring systemd](#configuring-systemd)
  * [Re-compiling the system with custom CFLAGS](#re-compiling-the-system-with-custom-cflags)
  * [Optimized CPU_FLAGS_X86](#optimized-cpu_flags_x86)
 
@@ -167,9 +167,9 @@ and reboot into your new system
     
 **If everything goes right you now should have a working base systen**
 
-# Configuring Systemd
+# Configuring systemd
 
-Now Gentoo should be restarted with the new Systemd init system so you can
+Now Gentoo should be restarted with the new systemd init system so you can
 
     systemd-machine-id-setup
     hostnamectl set-hostname <HOSTNAME>
